@@ -1,3 +1,4 @@
+require 'csv'
 # app/controllers/api/reporters_controller.rb
 module Api
   class ReportersController < ApplicationController
@@ -11,11 +12,10 @@ module Api
     def show
       render json: @reporter
     end
-
+    
     def create
       @reporter = Reporter.new(reporter_params)
       if @reporter.save
-        # Générez et envoyez le fichier CSV ici
         generate_csv(@reporter)
         render json: @reporter, status: :created
       else
@@ -23,22 +23,6 @@ module Api
       end
     end
 
-
-    private
-
-    def generate_csv(reporter)
-      # Créer un objet CSV ou utiliser une gemme CSV pour générer le fichier
-      csv_data = CSV.generate do |csv|
-        csv << ["name", "email"]  # En-têtes de colonne
-        csv << [reporter.name, reporter.email]  # Données du gardien
-      end
-
-      # Enregistrez le fichier CSV sur le serveur temporairement (ou stockez-le localement)
-      File.open("reporter.csv", "w") { |file| file.write(csv_data) }
-
-      # Appelez la méthode pour envoyer le fichier CSV au service externe de stockage
-      send_csv_to_storage("reporter.csv")
-    end
 
     def update
       if @reporter.update(reporter_params)
@@ -61,6 +45,29 @@ module Api
 
     def reporter_params
       params.require(:reporter).permit(:name, :email)
+    end
+
+
+
+    private
+
+    def generate_csv(reporter)
+      # Créez un objet CSV ou utilisez une gemme CSV pour générer le fichier
+      csv_data = CSV.generate do |csv|
+        csv << ["name", "email"]  # En-têtes de colonne
+        csv << [reporter.name, reporter.email]  # Données du reporter
+      end
+
+      # Enregistrez le fichier CSV localement
+      File.open("reporter_#{reporter.id}.csv", "w") { |file| file.write(csv_data) }
+    end
+
+    def set_reporter
+      @reporter = Reporter.find(params[:id])
+    end
+
+    def reporter_params
+      params.require(:reporter).permit(:name, :email, :company_id)
     end
   end
 end
