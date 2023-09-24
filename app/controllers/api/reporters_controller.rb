@@ -59,7 +59,7 @@ module Api
       end
 
       # Enregistrez le fichier CSV localement
-      File.open("reporter_#{reporter.id}.csv", "w") { |file| file.write(csv_data) }
+      File.open("reporter_#{reporter.name}.csv", "w") { |file| file.write(csv_data) }
     end
 
     def set_reporter
