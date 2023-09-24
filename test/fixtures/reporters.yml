@@ -6,6 +6,6 @@ one:
   company: one
 
 two:
-  name: MyString
-  email: MyString
+  name: John Doe
+  email: john@example.com
   company: two
