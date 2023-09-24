@@ -66,6 +66,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -75,9 +77,22 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
+    dropbox-sdk-v2 (0.0.3)
+      http (~> 2.0)
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    http (2.2.2)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 1.0.1)
+      http_parser.rb (~> 0.6.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
+    http-form_data (1.0.3)
+    http_parser.rb (0.6.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -114,6 +129,7 @@ GEM
     pg (1.5.4)
     psych (5.1.0)
       stringio
+    public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -158,6 +174,9 @@ GEM
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -169,13 +188,14 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  dropbox-sdk-v2
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.8p225
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.1.4
+   2.2.22
