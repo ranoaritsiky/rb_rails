@@ -16,6 +16,9 @@ COPY Gemfile Gemfile.lock ./
 # Install project dependencies
 RUN bundle install
 
+# Run database migrations
+RUN rails db:migrate
+
 # Copy the rest of the application code into the container
 COPY . .
 
