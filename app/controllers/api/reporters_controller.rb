@@ -67,29 +67,38 @@ module Api
       local_file_path
     end
 
+
     def upload_to_dropbox(file_path)
       # Configuration Dropbox
-      access_token = 'sl.BmqVuFXigOLwaImKTk5ASwwW8QH9doS9Jn0ykSYrI7Ox3gnwCNBL6vOh5J-pETxKuFnqLC1xa69NuqeGPPo_7t10aeVT_6oFolCn6WFkynAejbpLB_A4lat8EuQmhq7Dr95B2Dm3Fn8P' 
-      # Créez une instance DropboxClient
+      access_token = "sl.BmtkBrtOz87rLSk_G_s-WfzEeB80VsViQ3CkKnW3PUfPKK5e7yJGfM6j1K15LCRvv1_wiP_eTqrvr0Ot2JzXxGAgKSXCkY9RpjALz1tO3UtgOBvl9DefsJG-ViU08D0Y01tD50a8SQMbvUc"
+
+      # Initialize Dropbox client
       client = Dropbox::Client.new(access_token)
 
-      # Nom du dossier dans Dropbox où vous souhaitez téléverser les fichiers
-      dropbox_folder = '/'
+      # Specify the destination folder in Dropbox where you want to upload the files
+      dropbox_folder = '/sowell'
 
-      # Nom du fichier sur Dropbox (utilisez le nom local du fichier)
+      # Get the file name from the local file path
       file_name = File.basename(file_path)
 
-      # Chemin complet dans Dropbox (y compris le nom du dossier)
+      # Create the full Dropbox path (including the folder name)
       dropbox_path = "#{dropbox_folder}/#{file_name}"
 
-      # Téléversez le fichier vers Dropbox
-      response = client.upload(dropbox_path, File.open(file_path, 'rb'))
-
-      # Obtenez le lien partagé public vers le fichier téléversé
-      shared_link = client.create_shared_link(dropbox_path)
-
-      # Retournez le lien partagé public
-      shared_link.url
+      # Upload the file to Dropbox
+      begin
+        response = client.upload(dropbox_path, File.open(file_path))
+        
+        # Get the shared link to the uploaded file
+        shared_link = client.create_shared_link_with_settings(dropbox_path)
+        
+        # Extract the URL from the shared link
+        shared_link_url = shared_link.url
+        return shared_link_url
+      rescue Dropbox::Errors::UploadError => e
+        # Handle upload errors here
+        puts "Error uploading file: #{e.message}"
+        return nil
+      end
     end
 
 
