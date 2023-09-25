@@ -1,0 +1,32 @@
+# Ignore version control system files
+.git
+.gitignore
+
+# Ignore log files
+log/
+
+# Ignore temporary files
+tmp/
+
+# Ignore development and test environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore database configuration files
+config/database.yml
+
+# Ignore Gemfile.lock if you manage Gem versions in your Dockerfile
+# Gemfile.lock
+
+# Ignore node_modules if you use webpacker or JavaScript dependencies
+node_modules/
+
+# Ignore any other build artifacts or temporary files
+*.swp
+.DS_Store
+
+
+/tmp/pids/server.pid
