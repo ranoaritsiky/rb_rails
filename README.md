@@ -1,24 +1,40 @@
-# README
+# Nom du Projet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Description concise du projet.
 
-Things you may want to cover:
+## Table des matières
 
-* Ruby version
+- [Aperçu](#aperçu)
+- [Getting Started (Démarrage)](#getting-started)
+  - [Prérequis](#prérequis)
+  - [Installation](#installation)
+- [Utilisation](#utilisation)
 
-* System dependencies
+## Aperçu
 
-* Configuration
+souhaitons créer une API-ONLY Ruby on Rails pour gérer les gardiens (Reporters) de
+différentes entreprises (Companies). 
+Chaque entreprise peut avoir plusieurs gardiens, et
+nous voulons également que chaque fois qu'un nouveau gardien est créé, un fichier CSV
+contenant des informations sur ce gardien soit généré et envoyé à un service externe de
+stockage.
+## Getting Started (Démarrage)
 
-* Database creation
+git clone https://github.com/ranoaritsiky/rb_rails.git
 
-* Database initialization
+### Prérequis
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+Exemple :
+- Docker
+- Compte GitHub
+- Docker-compose
 
-* Deployment instructions
+### Installation
 
-* ...
+Pour commencer:
+- docker-compose build
+- docker-compose up
+
+Lancer les test unitaire :
+1. rails test
